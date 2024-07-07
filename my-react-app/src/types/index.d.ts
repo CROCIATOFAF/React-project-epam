@@ -1,32 +1,33 @@
-interface SearchProps {
+export interface SearchProps {
   onSearch: (term: string) => void;
 }
 
-interface SearchState {
+export interface SearchState {
   searchTerm: string;
 }
 
-interface Pokemon {
+export interface Pokemon {
   name: string;
   url: string;
   description: string;
 }
 
-interface ResultsProps {
+export interface ResultsProps {
   items: Pokemon[];
   loading: boolean;
 }
 
-interface Props {
+export interface Props {
   children: React.ReactNode;
 }
 
-interface State {
+export interface State {
   hasError: boolean;
 }
 
-interface AppState {
+export interface AppState {
   searchTerm: string;
   results: Pokemon[];
   loading: boolean;
+  hasError: boolean;
 }

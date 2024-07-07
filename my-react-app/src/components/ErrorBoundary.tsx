@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo } from 'react';
+import { Component, ErrorInfo } from 'react';
 import { Props, State } from '../types/index';
 
 class ErrorBoundary extends Component<Props, State> {

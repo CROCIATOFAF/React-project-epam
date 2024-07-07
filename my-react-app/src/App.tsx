@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import Search from './components/Search';
 import Results from './components/Results';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -26,7 +26,7 @@ class App extends Component<Record<string, never>, AppState> {
     try {
       const results: Pokemon[] = [];
       if (term) {
-        // Fetches specific Pokémon by name or ID
+        // Fetch specific Pokémon by name or ID
         const response = await fetch(
           `https://pokeapi.co/api/v2/pokemon/${term.toLowerCase()}`,
         );
@@ -45,7 +45,7 @@ class App extends Component<Record<string, never>, AppState> {
           });
         }
       } else {
-        // Fetches a list of Pokémon
+        // Fetch a list of Pokémon
         const response = await fetch(
           `https://pokeapi.co/api/v2/pokemon?limit=10&offset=0`,
         );
@@ -95,7 +95,11 @@ class App extends Component<Record<string, never>, AppState> {
         </div>
         <div className="bottom-section">
           <ErrorBoundary>
-            <Results items={results} loading={loading} hasError={hasError} />
+            {hasError ? (
+              <div className="error-message">Whoops, something went wrong.</div>
+            ) : (
+              <Results items={results} loading={loading} />
+            )}
           </ErrorBoundary>
         </div>
       </div>
