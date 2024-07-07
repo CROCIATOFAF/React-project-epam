@@ -1,0 +1,19 @@
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-input {
+  width: 300px;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.search-button {
+  padding: 10px 20px;
+
+  &:hover {
+    border-color: #008080;
+  }
+}
