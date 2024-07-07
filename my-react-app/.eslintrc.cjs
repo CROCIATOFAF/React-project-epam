@@ -1,8 +1,8 @@
 module.exports = {
   root: true,
-  env: { 
+  env: {
     browser: true,
-    es2020: true 
+    es2020: true,
   },
   extends: [
     'eslint:recommended',
@@ -11,15 +11,21 @@ module.exports = {
     'prettier',
     'plugin:prettier/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'react-refresh', 'react-compiler', 'prettier'],
+  plugins: [
+    '@typescript-eslint',
+    'react-refresh',
+    'react-hooks',
+    'prettier',
+    'react-compiler',
+  ],
   rules: {
     '@typescript-eslint/no-explicit-any': 'error',
-    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-    "react-compiler/react-compiler": "error",
-    'react-compiler/rules-of-hooks': 'error',
-    'react-compiler/react-in-jsx-scope': 'error',
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
+    ],
+    'react-compiler/react-compiler': 'error',
     'prettier/prettier': 'error',
   },
   settings: {
@@ -27,4 +33,4 @@ module.exports = {
       version: 'detect',
     },
   },
-}
+};
