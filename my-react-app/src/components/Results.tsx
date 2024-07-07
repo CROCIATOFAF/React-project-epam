@@ -15,7 +15,7 @@ class Results extends Component<ResultsProps> {
           <div key={item.name} className="result-item">
             <h2>{item.name}</h2>
             <p>{item.description}</p>
-            <a href={item.url}>{item.url}</a>
+            {/* <a href={item.url}>{item.url}</a> */}
           </div>
         ))}
       </div>

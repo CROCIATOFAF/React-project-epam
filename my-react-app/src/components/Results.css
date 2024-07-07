@@ -17,6 +17,7 @@
 
 .result-item h2 {
   margin: 0 0 10px;
+  text-transform: uppercase;
 }
 
 .result-item p {
