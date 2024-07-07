@@ -12,6 +12,7 @@ class App extends Component<Record<string, never>, AppState> {
       searchTerm: '',
       results: [],
       loading: false,
+      hasError: false,
     };
   }
 
@@ -78,25 +79,26 @@ class App extends Component<Record<string, never>, AppState> {
   };
 
   throwError = () => {
-    throw new Error('Test error');
+    this.setState({ hasError: true });
   };
 
   render() {
-    const { results, loading } = this.state;
+    const { results, loading, hasError } = this.state;
+
     return (
-      <ErrorBoundary>
-        <div className="app-container">
-          <div className="top-section">
-            <Search onSearch={this.handleSearch} />
-            <button onClick={this.throwError} className="error-button">
-              Throw Error
-            </button>
-          </div>
-          <div className="bottom-section">
-            <Results items={results} loading={loading} />
-          </div>
+      <div className="app-container">
+        <div className="top-section">
+          <Search onSearch={this.handleSearch} />
+          <button onClick={this.throwError} className="error-button">
+            Throw Error
+          </button>
         </div>
-      </ErrorBoundary>
+        <div className="bottom-section">
+          <ErrorBoundary>
+            <Results items={results} loading={loading} hasError={hasError} />
+          </ErrorBoundary>
+        </div>
+      </div>
     );
   }
 }
