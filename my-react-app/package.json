@@ -9,7 +9,8 @@
     "lint": "eslint . --ext .ts,.tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "prepare": "husky",
-    "format:fix": "prettier --write ."
+    "format:fix": "prettier --write .",
+    "test": "jest --coverage"
   },
   "dependencies": {
     "react": "^18.3.1",
