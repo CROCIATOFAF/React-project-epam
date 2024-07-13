@@ -1,43 +1,40 @@
-import { Component } from 'react';
-import { SearchProps, SearchState } from '../types/index';
+// import { SearchProps, SearchState } from '../types/index';
+import { SearchProps } from '../types/index';
+import React, { useState, useEffect } from 'react';
+import usePersistedState from '../hooks/usePersistedState';
 import './Search.css';
 
-class Search extends Component<SearchProps, SearchState> {
-  constructor(props: SearchProps) {
-    super(props);
-    const savedTerm = localStorage.getItem('searchTerm') || '';
-    this.state = { searchTerm: savedTerm };
-  }
+const Search: React.FC<SearchProps> = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState<string>(() => {
+    return localStorage.getItem('searchTerm') || '';
+  });
 
-  handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ searchTerm: e.target.value });
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
   };
 
-  handleSearch = () => {
-    const { searchTerm } = this.state;
+  const handleSearch = () => {
     const trimmedTerm = searchTerm.trim();
-    this.props.onSearch(trimmedTerm);
+    onSearch(trimmedTerm);
     if (trimmedTerm) {
       localStorage.setItem('searchTerm', trimmedTerm);
     }
   };
 
-  render() {
-    return (
-      <div className="search-container">
-        <input
-          type="text"
-          value={this.state.searchTerm}
-          onChange={this.handleInputChange}
-          className="search-input"
-          placeholder="Search Pokémon"
-        />
-        <button onClick={this.handleSearch} className="search-button">
-          Search
-        </button>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="search-container">
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={handleInputChange}
+        className="search-input"
+        placeholder="Search Pokémon"
+      />
+      <button onClick={handleSearch} className="search-button">
+        Search
+      </button>
+    </div>
+  );
+};
 
 export default Search;

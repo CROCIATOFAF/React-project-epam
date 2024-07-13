@@ -1,110 +1,128 @@
-import { Component } from 'react';
+import { AppState, Pokemon } from './types/index';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Search from './components/Search';
 import Results from './components/Results';
 import ErrorBoundary from './components/ErrorBoundary';
-import { AppState, Pokemon } from './types/index';
+import NotFound from './pages/NotFound';
+import Pagination from './components/Pagination';
 import './App.css';
 
-class App extends Component<Record<string, never>, AppState> {
-  constructor(props: Record<string, never>) {
-    super(props);
-    this.state = {
-      searchTerm: '',
-      results: [],
-      loading: false,
-      hasError: false,
-    };
-  }
+const ITEMS_PER_PAGE = 5;
 
-  componentDidMount() {
-    const savedTerm = localStorage.getItem('searchTerm') || '';
-    this.fetchData(savedTerm);
-  }
+const App: React.FC = () => {
+  const [results, setResults] = useState<Pokemon[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [searchTerm, setSearchTerm] = useState<string>(() => {
+    return localStorage.getItem('searchTerm') || '';
+  });
 
-  fetchData = async (term: string) => {
-    this.setState({ loading: true });
+  const fetchData = async (term: string, page: number) => {
+    setLoading(true);
     try {
-      const results: Pokemon[] = [];
+      const offset = (page - 1) * ITEMS_PER_PAGE;
+      const url = term
+        ? `https://pokeapi.co/api/v2/pokemon/${term.toLowerCase()}`
+        : `https://pokeapi.co/api/v2/pokemon?limit=${ITEMS_PER_PAGE}&offset=${offset}`;
+
+      const response = await fetch(url);
+      const data = await response.json();
+
       if (term) {
-        // Fetch specific Pokémon by name or ID
-        const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${term.toLowerCase()}`,
-        );
-        if (response.ok) {
-          const data = await response.json();
-          const speciesResponse = await fetch(data.species.url);
-          const speciesData = await speciesResponse.json();
-          const description = speciesData.flavor_text_entries.find(
-            (entry: { language: { name: string } }) =>
-              entry.language.name === 'en',
-          )?.flavor_text;
-          results.push({
+        const speciesResponse = await fetch(data.species.url);
+        const speciesData = await speciesResponse.json();
+        const description = speciesData.flavor_text_entries.find(
+          (entry: { language: { name: string } }) =>
+            entry.language.name === 'en',
+        )?.flavor_text;
+        setResults([
+          {
             name: data.name,
             url: `https://pokeapi.co/api/v2/pokemon/${data.id}/`,
             description: description || 'No description available',
-          });
-        }
+          },
+        ]);
+        setTotalPages(1);
       } else {
-        // Fetch a list of Pokémon
-        const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon?limit=10&offset=0`,
+        const fetchedResults: Pokemon[] = await Promise.all(
+          data.results.map(async (item: { name: string; url: string }) => {
+            const pokeResponse = await fetch(item.url);
+            const pokeData = await pokeResponse.json();
+            const speciesResponse = await fetch(pokeData.species.url);
+            const speciesData = await speciesResponse.json();
+            const description = speciesData.flavor_text_entries.find(
+              (entry: { language: { name: string } }) =>
+                entry.language.name === 'en',
+            )?.flavor_text;
+            return {
+              name: pokeData.name,
+              url: `https://pokeapi.co/api/v2/pokemon/${pokeData.id}/`,
+              description: description || 'No description available',
+            };
+          }),
         );
-        const data = await response.json();
-        for (const item of data.results) {
-          const pokeResponse = await fetch(item.url);
-          const pokeData = await pokeResponse.json();
-          const speciesResponse = await fetch(pokeData.species.url);
-          const speciesData = await speciesResponse.json();
-          const description = speciesData.flavor_text_entries.find(
-            (entry: { language: { name: string } }) =>
-              entry.language.name === 'en',
-          )?.flavor_text;
-          results.push({
-            name: pokeData.name,
-            url: `https://pokeapi.co/api/v2/pokemon/${pokeData.id}/`,
-            description: description || 'No description available',
-          });
-        }
+        setResults(fetchedResults);
+        setTotalPages(Math.ceil(data.count / ITEMS_PER_PAGE));
       }
-      this.setState({ results, loading: false });
     } catch (error) {
       console.error('Error fetching data:', error);
-      this.setState({ loading: false });
+      setResults([]);
     }
+    setLoading(false);
   };
 
-  handleSearch = (term: string) => {
-    this.setState({ searchTerm: term });
-    this.fetchData(term);
+  useEffect(() => {
+    fetchData(searchTerm, currentPage);
+  }, [searchTerm, currentPage]);
+
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+    setCurrentPage(1);
+    localStorage.setItem('searchTerm', term);
   };
 
-  throwError = () => {
-    this.setState({ hasError: true });
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
-  render() {
-    const { results, loading, hasError } = this.state;
+  const throwError = () => {
+    throw new Error('Simulated Error');
+  };
 
-    return (
+  return (
+    <Router>
       <div className="app-container">
-        <div className="top-section">
-          <Search onSearch={this.handleSearch} />
-          <button onClick={this.throwError} className="error-button">
-            Throw Error
-          </button>
-        </div>
-        <div className="bottom-section">
-          <ErrorBoundary>
-            {hasError ? (
-              <div className="error-message">Whoops, something went wrong.</div>
-            ) : (
-              <Results items={results} loading={loading} />
-            )}
-          </ErrorBoundary>
-        </div>
+        <ErrorBoundary>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <div className="top-section">
+                    <Search onSearch={handleSearch} />
+                    <button onClick={throwError} className="error-button">
+                      Throw Error
+                    </button>
+                  </div>
+                  <div className="bottom-section">
+                    <Results items={results} loading={loading} />
+                    <Pagination
+                      currentPage={currentPage}
+                      totalPages={totalPages}
+                      onPageChange={handlePageChange}
+                    />
+                  </div>
+                </>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </ErrorBoundary>
       </div>
-    );
-  }
-}
+    </Router>
+  );
+};
 
 export default App;
