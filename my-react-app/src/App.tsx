@@ -1,20 +1,24 @@
-import { AppState, Pokemon } from './types/index';
+// import { AppState, Pokemon } from './types/index';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Search from './components/Search';
-import Results from './components/Results';
-import ErrorBoundary from './components/ErrorBoundary';
-import NotFound from './pages/NotFound';
-import Pagination from './components/Pagination';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import Search from './components/Search/Search';
+// import Results from './components/Results/Results';
+import NotFound from './pages/NotFound/NotFound';
+import Pagination from './components/Pagination/Pagination';
+import CardList from './components/CardList/CardList';
+import DetailedCard from './components/DetailedCard/DetailedCard';
+import { Pokemon } from './types/index';
 import './App.css';
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 4;
 
 const App: React.FC = () => {
   const [results, setResults] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [selectedCard, setSelectedCard] = useState<Pokemon | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>(() => {
     return localStorage.getItem('searchTerm') || '';
   });
@@ -46,8 +50,8 @@ const App: React.FC = () => {
         ]);
         setTotalPages(1);
       } else {
-        const fetchedResults: Pokemon[] = await Promise.all(
-          data.results.map(async (item: { name: string; url: string }) => {
+        const fetchedResults = await Promise.all(
+          data.results.map(async (item: { url: string }) => {
             const pokeResponse = await fetch(item.url);
             const pokeData = await pokeResponse.json();
             const speciesResponse = await fetch(pokeData.species.url);
@@ -87,6 +91,14 @@ const App: React.FC = () => {
     setCurrentPage(page);
   };
 
+  const handleCardClick = (card: Pokemon) => {
+    setSelectedCard(card);
+  };
+
+  const handleCloseDetail = () => {
+    setSelectedCard(null);
+  };
+
   const throwError = () => {
     throw new Error('Simulated Error');
   };
@@ -107,12 +119,27 @@ const App: React.FC = () => {
                     </button>
                   </div>
                   <div className="bottom-section">
-                    <Results items={results} loading={loading} />
-                    <Pagination
-                      currentPage={currentPage}
-                      totalPages={totalPages}
-                      onPageChange={handlePageChange}
-                    />
+                    {loading ? (
+                      <div className="loading-message">Loading...</div>
+                    ) : (
+                      <>
+                        <CardList
+                          items={results}
+                          onCardClick={handleCardClick}
+                        />
+                        <Pagination
+                          currentPage={currentPage}
+                          totalPages={totalPages}
+                          onPageChange={handlePageChange}
+                        />
+                        {selectedCard && (
+                          <DetailedCard
+                            item={selectedCard}
+                            onClose={handleCloseDetail}
+                          />
+                        )}
+                      </>
+                    )}
                   </div>
                 </>
               }

@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
-import Search from '../components/Search';
+import Search from '../components/Search/Search';
 
 describe('Search Component', () => {
   it('saves the entered value to local storage when search button is clicked', () => {
