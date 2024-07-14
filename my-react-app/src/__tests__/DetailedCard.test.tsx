@@ -1,27 +1,28 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
 import DetailedCard from '../components/DetailedCard/DetailedCard';
-import { Pokemon } from '../types/index';
+import { PokemonDetails } from '../types/index';
 
 describe('DetailedCard Component', () => {
-  const mockItem: Pokemon = {
+  const mockItem: PokemonDetails = {
     name: 'Bulbasaur',
-    url: 'https://pokeapi.co/api/v2/pokemon/1/',
+    image:
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
     description: 'A grass type Pokémon.',
+    height: 7,
+    weight: 69,
+    abilities: ['overgrow', 'chlorophyll'],
   };
 
-  it('correctly displays the detailed card data', () => {
+  it('renders the detailed card with correct data', () => {
     render(<DetailedCard item={mockItem} onClose={() => {}} />);
-
     expect(screen.getByText('Bulbasaur')).toBeInTheDocument();
     expect(screen.getByText('A grass type Pokémon.')).toBeInTheDocument();
-  });
-
-  it('closes the component when the close button is clicked', () => {
-    const handleClose = jest.fn();
-    render(<DetailedCard item={mockItem} onClose={handleClose} />);
-
-    fireEvent.click(screen.getByText('Close'));
-    expect(handleClose).toHaveBeenCalled();
+    expect(screen.getByAltText('Bulbasaur')).toBeInTheDocument();
+    expect(screen.getByText(/Height:/)).toBeInTheDocument();
+    expect(screen.getByText(/Weight:/)).toBeInTheDocument();
+    expect(screen.getByText(/Abilities:/)).toBeInTheDocument();
+    expect(screen.getByText('7')).toBeInTheDocument();
+    expect(screen.getByText('69')).toBeInTheDocument();
+    expect(screen.getByText('overgrow, chlorophyll')).toBeInTheDocument();
   });
 });

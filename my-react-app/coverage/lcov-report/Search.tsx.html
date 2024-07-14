@@ -22,7 +22,7 @@
           <div class="fl pad1y space-right2">
             <span class="strong">100% </span>
             <span class="quiet">Statements</span>
-            <span class="fraction">16/16</span>
+            <span class="fraction">14/14</span>
           </div>
 
           <div class="fl pad1y space-right2">
@@ -34,13 +34,13 @@
           <div class="fl pad1y space-right2">
             <span class="strong">100% </span>
             <span class="quiet">Functions</span>
-            <span class="fraction">6/6</span>
+            <span class="fraction">4/4</span>
           </div>
 
           <div class="fl pad1y space-right2">
             <span class="strong">100% </span>
             <span class="quiet">Lines</span>
-            <span class="fraction">16/16</span>
+            <span class="fraction">14/14</span>
           </div>
         </div>
         <p class="quiet">
@@ -97,37 +97,31 @@
 <a name='L39'></a><a href='#L39'>39</a>
 <a name='L40'></a><a href='#L40'>40</a>
 <a name='L41'></a><a href='#L41'>41</a>
-<a name='L42'></a><a href='#L42'>42</a>
-<a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a>
-<a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L42'></a><a href='#L42'>42</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -145,29 +139,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// import { SearchProps, SearchState } from '../types/index';
-import { SearchProps } from '../types/index';
-import React, { useState, useEffect } from 'react';
+import { SearchProps } from '../../types/index';
+// import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+// import usePersistedState from '../../hooks/usePersistedState';
 import './Search.css';
 &nbsp;
 const Search: React.FC&lt;SearchProps&gt; = ({ onSearch }) =&gt; {
-  const [searchTerm, setSearchTerm] = useState(
-    () =&gt; localStorage.getItem('searchTerm') || '',
-  );
-&nbsp;
-  useEffect(() =&gt; {
-    return () =&gt; {
-      localStorage.setItem('searchTerm', searchTerm);
-    };
-  }, [searchTerm]);
+  const [searchTerm, setSearchTerm] = useState&lt;string&gt;(() =&gt; {
+    return localStorage.getItem('searchTerm') || '';
+  });
 &nbsp;
   const handleInputChange = (e: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
     setSearchTerm(e.target.value);
   };
 &nbsp;
   const handleSearch = () =&gt; {
-    onSearch(searchTerm.trim());
-    if (searchTerm.trim()) {
-      localStorage.setItem('searchTerm', searchTerm.trim());
+    const trimmedTerm = searchTerm.trim();
+    onSearch(trimmedTerm);
+    if (trimmedTerm) {
+      localStorage.setItem('searchTerm', trimmedTerm);
     }
   };
 &nbsp;
@@ -202,7 +193,7 @@ export default Search;
         rel="noopener noreferrer"
         >istanbul</a
       >
-      at 2024-07-13T17:10:31.172Z
+      at 2024-07-14T22:22:43.808Z
     </div>
     <script src="prettify.js"></script>
     <script>

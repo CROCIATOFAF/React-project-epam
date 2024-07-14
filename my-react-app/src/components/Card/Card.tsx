@@ -9,8 +9,11 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ item, onClick }) => (
   <div className="card" onClick={onClick}>
-    <h3>{item.name}</h3>
-    <p>{item.description}</p>
+    <img src={item.image} alt={item.name} className="card-image" />
+    <div className="card-info__container">
+      <h3>{item.name}</h3>
+      <p>{item.description}</p>
+    </div>
   </div>
 );
 

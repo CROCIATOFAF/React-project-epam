@@ -8,11 +8,15 @@ describe('Results Component', () => {
       name: 'Bulbasaur',
       url: 'https://pokeapi.co/api/v2/pokemon/1/',
       description: 'A grass type Pokémon.',
+      image:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
     },
     {
       name: 'Charmander',
       url: 'https://pokeapi.co/api/v2/pokemon/4/',
       description: 'A fire type Pokémon.',
+      image:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png',
     },
   ];
 

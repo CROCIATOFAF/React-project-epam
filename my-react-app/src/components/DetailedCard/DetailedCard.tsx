@@ -1,10 +1,9 @@
-// src/components/DetailedCard.tsx
 import React from 'react';
-import { Pokemon } from '../../types/index';
+import { PokemonDetails } from '../../types/index';
 import './DetailedCard.css';
 
 interface DetailedCardProps {
-  item: Pokemon;
+  item: PokemonDetails;
   onClose: () => void;
 }
 
@@ -14,7 +13,17 @@ const DetailedCard: React.FC<DetailedCardProps> = ({ item, onClose }) => (
       Close
     </button>
     <h2>{item.name}</h2>
+    <img src={item.image} alt={item.name} className="detailed-card-image" />
     <p>{item.description}</p>
+    <p>
+      <strong>Height:</strong> {item.height}
+    </p>
+    <p>
+      <strong>Weight:</strong> {item.weight}
+    </p>
+    <p>
+      <strong>Abilities:</strong> {item.abilities.join(', ')}
+    </p>
   </div>
 );
 

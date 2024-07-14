@@ -9,11 +9,15 @@ describe('CardList Component', () => {
       name: 'Bulbasaur',
       url: 'https://pokeapi.co/api/v2/pokemon/1/',
       description: 'A grass type Pokémon.',
+      image:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
     },
     {
       name: 'Charmander',
       url: 'https://pokeapi.co/api/v2/pokemon/4/',
       description: 'A fire type Pokémon.',
+      image:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png',
     },
   ];
 
@@ -32,7 +36,7 @@ describe('CardList Component', () => {
     expect(screen.getByText('No cards available')).toBeInTheDocument();
   });
 
-  it('triggers onCardClick when a card is clicked', () => {
+  it('calls onCardClick when a card is clicked', () => {
     const handleCardClick = jest.fn();
     render(<CardList items={mockItems} onCardClick={handleCardClick} />);
 
@@ -43,10 +47,17 @@ describe('CardList Component', () => {
     expect(handleCardClick).toHaveBeenCalledWith(mockItems[1]);
   });
 
-  it('should not throw any errors with an empty array of items', () => {
+  it('renders images correctly', () => {
     const handleCardClick = jest.fn();
-    render(<CardList items={[]} onCardClick={handleCardClick} />);
+    render(<CardList items={mockItems} onCardClick={handleCardClick} />);
 
-    expect(screen.getByText('No cards available')).toBeInTheDocument();
+    const bulbasaurImage = screen.getByAltText('Bulbasaur');
+    const charmanderImage = screen.getByAltText('Charmander');
+
+    expect(bulbasaurImage).toBeInTheDocument();
+    expect(bulbasaurImage).toHaveAttribute('src', mockItems[0].image);
+
+    expect(charmanderImage).toBeInTheDocument();
+    expect(charmanderImage).toHaveAttribute('src', mockItems[1].image);
   });
 });
