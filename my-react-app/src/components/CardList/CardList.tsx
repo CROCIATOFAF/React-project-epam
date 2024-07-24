@@ -1,7 +1,7 @@
 import React from 'react';
+import './CardList.css';
 import Card from '../Card/Card';
 import { Pokemon } from '../../types/index';
-import './CardList.css';
 
 interface CardListProps {
   items: Pokemon[];
@@ -15,7 +15,7 @@ const CardList: React.FC<CardListProps> = ({ items, onCardClick }) => (
         <Card key={item.name} item={item} onClick={() => onCardClick(item)} />
       ))
     ) : (
-      <p>No cards available</p>
+      <p className="card-list__error">No cards available</p>
     )}
   </div>
 );

@@ -9,7 +9,7 @@ import DetailedCard from './components/DetailedCard/DetailedCard';
 import { Pokemon, PokemonDetails } from './types/index';
 import './App.css';
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 6;
 
 const App: React.FC = () => {
   const [results, setResults] = useState<Pokemon[]>([]);

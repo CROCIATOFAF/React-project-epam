@@ -87,16 +87,7 @@
   display: flex;
   flex: 1;
   position: relative;
-}
-
-.left-section {
-  flex: 1;
-  transition: flex 0.3s ease;
-  overflow: auto;
-}
-
-.left-section.shrink {
-  flex: 0.5;
+  padding: 0 10px;
 }
 
 .right-section {

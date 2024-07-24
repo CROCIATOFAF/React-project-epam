@@ -1,15 +1,19 @@
 .card {
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 1em;
-  margin: 8px;
+  padding: 0.5em;
+  /* margin: 8px; */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition:
     transform 0.2s ease-in-out,
     box-shadow 0.2s ease-in-out;
   background-color: #fffaf0;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-height: 190px;
 }
 
 .card:hover {
@@ -19,13 +23,40 @@
 
 .card h3 {
   margin: 0;
-  font-size: 1.5em;
+  font-size: 1.2em;
   color: #333;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .card p {
   margin: 8px 0 0;
   color: #666;
+  font-size: 0.9em;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.card-image {
+  width: 60%;
+  height: auto;
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.card-info__container {
+  padding: 8px;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.card-info__container h3 {
+  margin: 0 0 8px 0;
   font-size: 1.2em;
+}
+
+.card-info__container p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9em;
 }

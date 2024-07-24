@@ -1,82 +1,10 @@
-#root {
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
   max-width: 1280px;
   margin: 0 auto;
-  /* padding: 2rem; */
   text-align: center;
-  background: url(./assets/pokemon-cards.jpeg);
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-.app-container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
-.top-section {
-  flex: 0 0 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.bottom-section {
-  flex: 1;
-  overflow-y: auto;
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-.bottom-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.loading-message {
-  color: lightcoral;
-  font-size: 36px;
-  font-weight: bold;
-}
-
-.app-container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
 }
 
 .top-section {
@@ -108,7 +36,7 @@
   flex: 0 0 0;
   overflow-y: auto;
   background: #fffaf0;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
   transition: flex 0.3s ease;
   max-width: 50%;
   display: none;
@@ -119,12 +47,11 @@
   display: block;
   border: 1px solid #ccc;
   border-radius: 8px;
-  /* padding: 24px; */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .loading-message {
-  color: lightcoral;
+  color: #f08080;
   font-size: 36px;
-  font-weight: bold;
+  font-weight: 700;
 }
