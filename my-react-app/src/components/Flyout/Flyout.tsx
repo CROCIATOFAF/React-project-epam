@@ -1,23 +1,19 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { unselectAll } from '../../redux/slices/itemsSlice';
+import {
+  unselectAll,
+  selectSelectedItems,
+} from '../../redux/slices/itemsSlice';
 import { saveAs } from 'file-saver';
 import './Flyout.css';
 
 const Flyout: React.FC = () => {
   const dispatch = useAppDispatch();
-  const selectedItems = useAppSelector(state => state.items.selectedItems);
-  const items = useAppSelector(state => state.items.items);
+  const selectedItems = useAppSelector(selectSelectedItems);
 
-  const downloadItems = () => {
-    const selectedDetails = items.filter(item =>
-      selectedItems.includes(item.name),
-    );
+  const handleDownload = () => {
     const csvContent =
-      'data:text/csv;charset=utf-8,' +
-      selectedDetails
-        .map(e => `${e.name},${e.description},${e.url}`)
-        .join('\n');
+      'data:text/csv;charset=utf-8,' + selectedItems.join('\n');
     const encodedUri = encodeURI(csvContent);
     saveAs(encodedUri, `${selectedItems.length}_items.csv`);
   };
@@ -28,7 +24,7 @@ const Flyout: React.FC = () => {
     <div className="flyout">
       <p>{selectedItems.length} items selected</p>
       <button onClick={() => dispatch(unselectAll())}>Unselect all</button>
-      <button onClick={downloadItems}>Download</button>
+      <button onClick={handleDownload}>Download</button>
     </div>
   );
 };

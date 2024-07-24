@@ -1,8 +1,6 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { Pokemon, PokemonDetails } from '../../types/index';
-
-const ITEMS_PER_PAGE = 6;
+import { RootState } from '../store';
 
 interface ItemState {
   items: Pokemon[];
@@ -24,6 +22,7 @@ const initialState: ItemState = {
   searchTerm: '',
 };
 
+// Async thunk for fetching items
 export const fetchItems = createAsyncThunk(
   'items/fetchItems',
   async ({
@@ -48,12 +47,7 @@ export const fetchItems = createAsyncThunk(
       )?.flavor_text;
       return {
         results: [
-          {
-            name: data.name,
-            url: `https://pokeapi.co/api/v2/pokemon/${data.id}/`,
-            description: description || 'No description available',
-            image: data.sprites.front_default || '',
-          },
+          { ...data, description: description || 'No description available' },
         ],
         count: 1,
       };
@@ -69,10 +63,8 @@ export const fetchItems = createAsyncThunk(
             entry.language.name === 'en',
         )?.flavor_text;
         return {
-          name: pokeData.name,
-          url: `https://pokeapi.co/api/v2/pokemon/${pokeData.id}/`,
+          ...pokeData,
           description: description || 'No description available',
-          image: pokeData.sprites.front_default || '',
         };
       }),
     );
@@ -80,6 +72,7 @@ export const fetchItems = createAsyncThunk(
   },
 );
 
+// Async thunk for fetching item details
 export const fetchItemDetails = createAsyncThunk(
   'items/fetchItemDetails',
   async (name: string): Promise<PokemonDetails> => {
@@ -94,7 +87,7 @@ export const fetchItemDetails = createAsyncThunk(
     )?.flavor_text;
     return {
       name: data.name,
-      image: data.sprites.front_default || '',
+      image: data.sprites.front_default,
       description: description || 'No description available',
       height: data.height,
       weight: data.weight,
@@ -146,7 +139,7 @@ const itemsSlice = createSlice({
         ) => {
           state.loading = false;
           state.items = action.payload.results;
-          state.totalPages = Math.ceil(action.payload.count / ITEMS_PER_PAGE);
+          state.totalPages = Math.ceil(action.payload.count / 9);
         },
       )
       .addCase(fetchItems.rejected, state => {
@@ -186,5 +179,6 @@ export const selectTotalPages = (state: RootState) => state.items.totalPages;
 export const selectLoading = (state: RootState) => state.items.loading;
 export const selectSelectedCard = (state: RootState) =>
   state.items.selectedCard;
+export const selectSearchTerm = (state: RootState) => state.items.searchTerm;
 
 export default itemsSlice.reducer;

@@ -1,5 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from './redux/hooks';
+// import {
+//   setCurrentPage,
+//   setSelectedCard,
+//   setSearchTerm,
+//   selectCurrentPage,
+//   selectSearchTerm,
+// } from './redux/slices/itemsSlice';
+import {
+  setCurrentPage,
+  setSearchTerm,
+  selectCurrentPage,
+  selectSearchTerm,
+} from './redux/slices/itemsSlice';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import Search from './components/Search/Search';
 import NotFound from './pages/NotFound/NotFound';
@@ -7,19 +21,22 @@ import Pagination from './components/Pagination/Pagination';
 import CardList from './components/CardList/CardList';
 import DetailedCard from './components/DetailedCard/DetailedCard';
 import { Pokemon, PokemonDetails } from './types/index';
+import Flyout from './components/Flyout/Flyout';
+import { ThemeProvider } from './contexts/ThemeContext';
+import ThemeSwitcher from './components/ThemeSwitcher/ThemeSwitcher';
 import './App.css';
 
 const ITEMS_PER_PAGE = 6;
 
 const App: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const currentPage = useAppSelector(selectCurrentPage);
+  const searchTerm = useAppSelector(selectSearchTerm);
+
   const [results, setResults] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [totalPages, setTotalPages] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedCard, setSelectedCard] = useState<PokemonDetails | null>(null);
-  const [searchTerm, setSearchTerm] = useState<string>(() => {
-    return localStorage.getItem('searchTerm') || '';
-  });
 
   const fetchData = async (term: string, page: number) => {
     setLoading(true);
@@ -111,13 +128,13 @@ const App: React.FC = () => {
   }, [searchTerm, currentPage]);
 
   const handleSearch = (term: string) => {
-    setSearchTerm(term);
-    setCurrentPage(1);
+    dispatch(setSearchTerm(term));
+    dispatch(setCurrentPage(1));
     localStorage.setItem('searchTerm', term);
   };
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+    dispatch(setCurrentPage(page));
   };
 
   const handleCardClick = (card: Pokemon) => {
@@ -139,43 +156,50 @@ const App: React.FC = () => {
   };
 
   return (
-    <Router>
-      <div className="app-container">
-        <ErrorBoundary>
-          <div className="top-section">
-            <Search onSearch={handleSearch} />
-            <button onClick={throwError} className="error-button">
-              Throw Error
-            </button>
-          </div>
-          <div className="bottom-section">
-            <div className={`left-section ${selectedCard ? 'shrink' : ''}`}>
-              {loading ? (
-                <div className="loading-message">Loading...</div>
-              ) : (
-                <>
-                  <CardList items={results} onCardClick={handleCardClick} />
-                  <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={handlePageChange}
+    <ThemeProvider>
+      <Router>
+        <div className="app-container">
+          <ErrorBoundary>
+            <div className="top-section">
+              <Search onSearch={handleSearch} />
+              <button onClick={throwError} className="error-button">
+                Throw Error
+              </button>
+              <ThemeSwitcher />
+            </div>
+            <div className="bottom-section">
+              <div className={`left-section ${selectedCard ? 'shrink' : ''}`}>
+                {loading ? (
+                  <div className="loading-message">Loading...</div>
+                ) : (
+                  <>
+                    <CardList items={results} onCardClick={handleCardClick} />
+                    <Pagination
+                      currentPage={currentPage}
+                      totalPages={totalPages}
+                      onPageChange={handlePageChange}
+                    />
+                  </>
+                )}
+              </div>
+              {selectedCard && (
+                <div className="right-section open">
+                  <DetailedCard
+                    item={selectedCard}
+                    onClose={handleCloseDetail}
                   />
-                </>
+                </div>
               )}
             </div>
-            {selectedCard && (
-              <div className="right-section open">
-                <DetailedCard item={selectedCard} onClose={handleCloseDetail} />
-              </div>
-            )}
-          </div>
-          <Routes>
-            <Route path="/" element={<></>} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </ErrorBoundary>
-      </div>
-    </Router>
+            <Flyout />
+            <Routes>
+              <Route path="/" element={<></>} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </ErrorBoundary>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 };
 

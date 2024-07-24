@@ -1,14 +1,34 @@
 import React from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
+import './ThemeSwitcher.css';
 
 const ThemeSwitcher: React.FC = () => {
   const { theme, setTheme } = useTheme();
 
+  const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTheme(event.target.value as 'light' | 'dark');
+  };
+
   return (
-    <div>
-      <button onClick={() => setTheme('light')}>Light</button>
-      <button onClick={() => setTheme('dark')}>Dark</button>
-      <div>Current theme: {theme}</div>
+    <div className="theme-switcher">
+      <label>
+        <input
+          type="radio"
+          value="light"
+          checked={theme === 'light'}
+          onChange={handleThemeChange}
+        />
+        Light
+      </label>
+      <label>
+        <input
+          type="radio"
+          value="dark"
+          checked={theme === 'dark'}
+          onChange={handleThemeChange}
+        />
+        Dark
+      </label>
     </div>
   );
 };
