@@ -1,0 +1,95 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.top-section {
+  flex: 0 0 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-section {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  flex-direction: row;
+}
+
+.left-section {
+  flex: 1;
+  overflow-y: auto;
+  transition: flex 0.3s ease;
+}
+
+.left-section.shrink {
+  flex: 0 0 50%;
+}
+
+.right-section {
+  flex: 0 0 0;
+  overflow-y: auto;
+  background: #fffaf0;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: flex 0.3s ease;
+  max-width: 50%;
+  display: none;
+}
+
+.right-section.open {
+  flex: 1;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.loading-message {
+  color: #f08080;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.light {
+  --background-color: #fffaf0;
+  --text-color: #333;
+  --card-background-color: #ffffff;
+  --card-text-color: #000;
+  --pagination-background-color: #fffaf0;
+  --pagination-text-color: #007bff;
+}
+
+.dark {
+  --background-color: #2c2c2c;
+  --text-color: #fff;
+  --card-background-color: #333;
+  --card-text-color: #fff;
+  --pagination-background-color: #444;
+  --pagination-text-color: #fff;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.card {
+  background-color: var(--card-background-color);
+  color: var(--card-text-color);
+}
+
+.card-info__container h3,
+.card-info__container p {
+  color: var(--card-text-color);
+}
+
+.pagination a {
+  background-color: var(--pagination-background-color);
+  color: var(--pagination-text-color);
+}

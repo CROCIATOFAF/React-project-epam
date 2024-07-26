@@ -1,0 +1,35 @@
+.theme-switcher {
+  border: 2px solid #008080;
+  border-radius: 15px;
+  display: flex;
+  padding: 5px;
+  background-color: #fffaf0;
+
+  &:hover {
+    background-color: #66cdaa;
+  }
+
+  label {
+    color: #666666;
+    tab-size: 1em;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    margin: 0 10px 0 0;
+  }
+  input {
+    margin: 0 5px 0 0;
+  }
+}
+
+.dark .theme-switcher {
+  background-color: #333333;
+  border: 1px solid #555;
+  label {
+    color: #fffaf0;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

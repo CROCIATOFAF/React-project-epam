@@ -1,0 +1,50 @@
+.not-found {
+  font-size: 5em;
+  font-weight: bold;
+  background: linear-gradient(
+    120deg,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}
+#root {
+  /* background-image: url('../../assets/pokemon-cards.jpeg'); */
+  --bg-light: url('../../assets/pokemon-cards.jpeg');
+  --bg-dark: url('../../assets/pokemon-theme-dark.jpg');
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.3s ease-in-out;
+}
+#root:has(.not-found) {
+  background: url('../../assets/gengar.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+#root.not-found-active {
+  background: url('../../assets/gengar.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#root.light {
+  background-image: var(--bg-light);
+}
+
+#root.dark {
+  background-image: var(--bg-dark);
+}
+
+#root {
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.3s ease-in-out;
+}
