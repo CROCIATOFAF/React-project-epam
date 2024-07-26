@@ -16,7 +16,7 @@
       },
       "3": {
         "start": { "line": 16, "column": 34 },
-        "end": { "line": 44, "column": 1 }
+        "end": { "line": 46, "column": 1 }
       },
       "4": {
         "start": { "line": 17, "column": 19 },
@@ -36,7 +36,7 @@
       },
       "8": {
         "start": { "line": 22, "column": 6 },
-        "end": { "line": 22, "column": 38 }
+        "end": { "line": 22, "column": 33 }
       },
       "9": {
         "start": { "line": 24, "column": 6 },
@@ -44,15 +44,19 @@
       },
       "10": {
         "start": { "line": 28, "column": 2 },
-        "end": { "line": 43, "column": 4 }
+        "end": { "line": 45, "column": 4 }
       },
       "11": {
-        "start": { "line": 35, "column": 22 },
-        "end": { "line": 35, "column": 41 }
+        "start": { "line": 34, "column": 26 },
+        "end": { "line": 34, "column": 57 }
       },
       "12": {
-        "start": { "line": 46, "column": 0 },
-        "end": { "line": 46, "column": 20 }
+        "start": { "line": 37, "column": 22 },
+        "end": { "line": 37, "column": 41 }
+      },
+      "13": {
+        "start": { "line": 48, "column": 0 },
+        "end": { "line": 48, "column": 20 }
       }
     },
     "fnMap": {
@@ -64,7 +68,7 @@
         },
         "loc": {
           "start": { "line": 16, "column": 56 },
-          "end": { "line": 44, "column": 1 }
+          "end": { "line": 46, "column": 1 }
         }
       },
       "1": {
@@ -81,12 +85,23 @@
       "2": {
         "name": "(anonymous_2)",
         "decl": {
-          "start": { "line": 35, "column": 17 },
-          "end": { "line": 35, "column": 18 }
+          "start": { "line": 34, "column": 10 },
+          "end": { "line": 34, "column": 22 }
         },
         "loc": {
-          "start": { "line": 35, "column": 22 },
-          "end": { "line": 35, "column": 41 }
+          "start": { "line": 34, "column": 26 },
+          "end": { "line": 34, "column": 57 }
+        }
+      },
+      "3": {
+        "name": "(anonymous_3)",
+        "decl": {
+          "start": { "line": 37, "column": 17 },
+          "end": { "line": 37, "column": 18 }
+        },
+        "loc": {
+          "start": { "line": 37, "column": 22 },
+          "end": { "line": 37, "column": 41 }
         }
       }
     },
@@ -115,17 +130,18 @@
       "2": 2,
       "3": 2,
       "4": 28,
-      "5": 0,
-      "6": 0,
-      "7": 0,
-      "8": 0,
+      "5": 4,
+      "6": 4,
+      "7": 2,
+      "8": 2,
       "9": 0,
-      "10": 0,
-      "11": 0,
-      "12": 2
+      "10": 4,
+      "11": 1,
+      "12": 2,
+      "13": 2
     },
-    "f": { "0": 28, "1": 0, "2": 0 },
-    "b": { "0": [0, 0] }
+    "f": { "0": 28, "1": 2, "2": 1, "3": 2 },
+    "b": { "0": [2, 0] }
   },
   "/Users/gulvafiro/Desktop/epam projects/React course/react-project/my-react-app/src/components/CardList/CardList.tsx": {
     "path": "/Users/gulvafiro/Desktop/epam projects/React course/react-project/my-react-app/src/components/CardList/CardList.tsx",
@@ -568,7 +584,7 @@
         "end": { "line": 1, "column": 80 }
       },
       "1": {
-        "start": { "line": 15, "column": 32 },
+        "start": { "line": 15, "column": 13 },
         "end": { "line": 23, "column": 2 }
       },
       "2": {
@@ -700,8 +716,8 @@
         "end": { "line": 114, "column": 8 }
       },
       "34": {
-        "start": { "line": 113, "column": 14 },
-        "end": { "line": 113, "column": 35 }
+        "start": { "line": 113, "column": 16 },
+        "end": { "line": 113, "column": 44 }
       },
       "35": {
         "start": { "line": 117, "column": 6 },
@@ -948,7 +964,7 @@
           "end": { "line": 108, "column": 17 }
         },
         "loc": {
-          "start": { "line": 108, "column": 57 },
+          "start": { "line": 108, "column": 58 },
           "end": { "line": 110, "column": 5 }
         }
       },
@@ -967,11 +983,11 @@
         "name": "(anonymous_10)",
         "decl": {
           "start": { "line": 113, "column": 8 },
-          "end": { "line": 113, "column": 10 }
+          "end": { "line": 113, "column": 12 }
         },
         "loc": {
-          "start": { "line": 113, "column": 14 },
-          "end": { "line": 113, "column": 35 }
+          "start": { "line": 113, "column": 16 },
+          "end": { "line": 113, "column": 44 }
         }
       },
       "11": {
@@ -1311,7 +1327,7 @@
       "51": 0,
       "52": 2,
       "53": 2,
-      "54": 0,
+      "54": 8,
       "55": 2,
       "56": 2,
       "57": 0,
@@ -1354,7 +1370,7 @@
       "20": 0,
       "21": 0,
       "22": 0,
-      "23": 0,
+      "23": 8,
       "24": 0,
       "25": 0,
       "26": 0,

@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1722014548726" clover="3.2.0">
-  <project timestamp="1722014548726" name="All files">
-    <metrics statements="109" coveredstatements="56" conditionals="18" coveredconditionals="7" methods="43" coveredmethods="11" elements="170" coveredelements="74" complexity="0" loc="109" ncloc="109" packages="7" files="7" classes="7"/>
+<coverage generated="1722023857135" clover="3.2.0">
+  <project timestamp="1722023857135" name="All files">
+    <metrics statements="110" coveredstatements="64" conditionals="18" coveredconditionals="8" methods="44" coveredmethods="15" elements="172" coveredelements="87" complexity="0" loc="110" ncloc="110" packages="7" files="7" classes="7"/>
     <package name="components.Card">
-      <metrics statements="13" coveredstatements="6" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="1"/>
+      <metrics statements="14" coveredstatements="13" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="4"/>
       <file name="Card.tsx" path="/Users/gulvafiro/Desktop/epam projects/React course/react-project/my-react-app/src/components/Card/Card.tsx">
-        <metrics statements="13" coveredstatements="6" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="1"/>
+        <metrics statements="14" coveredstatements="13" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="4"/>
         <line num="3" count="2" type="stmt"/>
         <line num="4" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
         <line num="16" count="2" type="stmt"/>
         <line num="17" count="28" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="21" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="22" count="0" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
+        <line num="21" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="22" count="2" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="46" count="2" type="stmt"/>
+        <line num="28" count="4" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="48" count="2" type="stmt"/>
       </file>
     </package>
     <package name="components.CardList">
@@ -88,9 +89,9 @@
       </file>
     </package>
     <package name="redux.slices">
-      <metrics statements="60" coveredstatements="14" conditionals="9" coveredconditionals="0" methods="29" coveredmethods="0"/>
+      <metrics statements="60" coveredstatements="15" conditionals="9" coveredconditionals="0" methods="29" coveredmethods="1"/>
       <file name="itemsSlice.ts" path="/Users/gulvafiro/Desktop/epam projects/React course/react-project/my-react-app/src/redux/slices/itemsSlice.ts">
-        <metrics statements="60" coveredstatements="14" conditionals="9" coveredconditionals="0" methods="29" coveredmethods="0"/>
+        <metrics statements="60" coveredstatements="15" conditionals="9" coveredconditionals="0" methods="29" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="15" count="2" type="stmt"/>
         <line num="26" count="2" type="stmt"/>
@@ -143,7 +144,7 @@
         <line num="164" count="2" type="stmt"/>
         <line num="174" count="2" type="stmt"/>
         <line num="175" count="2" type="stmt"/>
-        <line num="176" count="0" type="stmt"/>
+        <line num="176" count="8" type="stmt"/>
         <line num="177" count="2" type="stmt"/>
         <line num="178" count="2" type="stmt"/>
         <line num="179" count="2" type="stmt"/>

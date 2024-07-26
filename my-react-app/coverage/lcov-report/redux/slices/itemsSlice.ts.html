@@ -23,9 +23,9 @@
         </h1>
         <div class="clearfix">
           <div class="fl pad1y space-right2">
-            <span class="strong">29.16% </span>
+            <span class="strong">30.55% </span>
             <span class="quiet">Statements</span>
-            <span class="fraction">21/72</span>
+            <span class="fraction">22/72</span>
           </div>
 
           <div class="fl pad1y space-right2">
@@ -35,15 +35,15 @@
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">0% </span>
+            <span class="strong">3.44% </span>
             <span class="quiet">Functions</span>
-            <span class="fraction">0/29</span>
+            <span class="fraction">1/29</span>
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">23.33% </span>
+            <span class="strong">25% </span>
             <span class="quiet">Lines</span>
-            <span class="fraction">14/60</span>
+            <span class="fraction">15/60</span>
           </div>
         </div>
         <p class="quiet">
@@ -418,7 +418,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -431,9 +431,9 @@
 import { Pokemon, PokemonDetails } from '../../types/index';
 import { RootState } from '../store';
 &nbsp;
-interface ItemState {
+export interface ItemState {
   items: Pokemon[];
-  selectedItems: string[];
+  selectedItems: Pokemon[];
   currentPage: number;
   totalPages: number;
   selectedCard: PokemonDetails | null;
@@ -441,7 +441,7 @@ interface ItemState {
   searchTerm: string;
 }
 &nbsp;
-const initialState: ItemState = {
+export const initialState: ItemState = {
   items: [],
   selectedItems: [],
   currentPage: 1,
@@ -451,7 +451,7 @@ const initialState: ItemState = {
   searchTerm: '',
 };
 &nbsp;
-// Async thunk for fetching items
+// for fetching items
 export const fetchItems = createAsyncThunk(
   'items/fetchItems',
 <span class="fstat-no" title="function not covered" >  async </span>({
@@ -501,7 +501,7 @@ export const fetchItems = createAsyncThunk(
   },
 );
 &nbsp;
-// Async thunk for fetching item details
+// fetching item details
 export const fetchItemDetails = createAsyncThunk(
   'items/fetchItemDetails',
 <span class="fstat-no" title="function not covered" >  async </span>(name: string): Promise&lt;PokemonDetails&gt; =&gt; {
@@ -534,12 +534,12 @@ const itemsSlice = createSlice({
     setItems: <span class="fstat-no" title="function not covered" >(s</span>tate, action: PayloadAction&lt;Pokemon[]&gt;) =&gt; {
 <span class="cstat-no" title="statement not covered" >      state.items = action.payload;</span>
     },
-    selectItem: <span class="fstat-no" title="function not covered" >(s</span>tate, action: PayloadAction&lt;string&gt;) =&gt; {
+    selectItem: <span class="fstat-no" title="function not covered" >(s</span>tate, action: PayloadAction&lt;Pokemon&gt;) =&gt; {
 <span class="cstat-no" title="statement not covered" >      state.selectedItems.push(action.payload);</span>
     },
     unselectItem: <span class="fstat-no" title="function not covered" >(s</span>tate, action: PayloadAction&lt;string&gt;) =&gt; {
 <span class="cstat-no" title="statement not covered" >      state.selectedItems = state.selectedItems.filter(</span>
-<span class="fstat-no" title="function not covered" >        id </span>=&gt; <span class="cstat-no" title="statement not covered" >id !== action.payload,</span>
+<span class="fstat-no" title="function not covered" >        item </span>=&gt; <span class="cstat-no" title="statement not covered" >item.name !== action.payload,</span>
       );
     },
     setCurrentPage: <span class="fstat-no" title="function not covered" >(s</span>tate, action: PayloadAction&lt;number&gt;) =&gt; {
@@ -601,8 +601,8 @@ export const {
 } = itemsSlice.actions;
 &nbsp;
 export const selectItems = <span class="fstat-no" title="function not covered" >(s</span>tate: RootState) =&gt; <span class="cstat-no" title="statement not covered" >state.items.items;</span>
-export const selectSelectedItems = <span class="fstat-no" title="function not covered" >(s</span>tate: RootState) =&gt;
-<span class="cstat-no" title="statement not covered" >  state.items.selectedItems;</span>
+export const selectSelectedItems = (state: RootState) =&gt;
+  state.items.selectedItems;
 export const selectCurrentPage = <span class="fstat-no" title="function not covered" >(s</span>tate: RootState) =&gt; <span class="cstat-no" title="statement not covered" >state.items.currentPage;</span>
 export const selectTotalPages = <span class="fstat-no" title="function not covered" >(s</span>tate: RootState) =&gt; <span class="cstat-no" title="statement not covered" >state.items.totalPages;</span>
 export const selectLoading = <span class="fstat-no" title="function not covered" >(s</span>tate: RootState) =&gt; <span class="cstat-no" title="statement not covered" >state.items.loading;</span>
@@ -625,7 +625,7 @@ export default itemsSlice.reducer;
         rel="noopener noreferrer"
         >istanbul</a
       >
-      at 2024-07-26T17:22:28.712Z
+      at 2024-07-26T19:57:37.115Z
     </div>
     <script src="../../prettify.js"></script>
     <script>

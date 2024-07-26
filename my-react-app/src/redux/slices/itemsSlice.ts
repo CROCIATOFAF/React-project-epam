@@ -2,7 +2,7 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { Pokemon, PokemonDetails } from '../../types/index';
 import { RootState } from '../store';
 
-interface ItemState {
+export interface ItemState {
   items: Pokemon[];
   selectedItems: Pokemon[];
   currentPage: number;
@@ -12,7 +12,7 @@ interface ItemState {
   searchTerm: string;
 }
 
-const initialState: ItemState = {
+export const initialState: ItemState = {
   items: [],
   selectedItems: [],
   currentPage: 1,
