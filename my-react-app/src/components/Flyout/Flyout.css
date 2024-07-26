@@ -17,3 +17,14 @@
     font-size: 1.1em;
   }
 }
+
+.dark .flyout {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+.dark .flyout p {
+  background-color: #333;
+  color: #fff;
+}

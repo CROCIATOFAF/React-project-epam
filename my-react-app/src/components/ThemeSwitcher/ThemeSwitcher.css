@@ -1,5 +1,5 @@
 .theme-switcher {
-  border: 2px solid #666666;
+  border: 2px solid #008080;
   border-radius: 15px;
   display: flex;
   padding: 5px;
@@ -19,5 +19,17 @@
   }
   input {
     margin: 0 5px 0 0;
+  }
+}
+
+.dark .theme-switcher {
+  background-color: #333333;
+  border: 1px solid #555;
+  label {
+    color: #fffaf0;
+  }
+
+  &:hover {
+    opacity: 0.8;
   }
 }
