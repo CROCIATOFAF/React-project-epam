@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
-// import {
-//   setCurrentPage,
-//   setSelectedCard,
-//   setSearchTerm,
-//   selectCurrentPage,
-//   selectSearchTerm,
-// } from './redux/slices/itemsSlice';
 import {
   setCurrentPage,
+  // setSelectedCard,
   setSearchTerm,
   selectCurrentPage,
   selectSearchTerm,
@@ -101,8 +95,8 @@ const App: React.FC = () => {
         `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`,
       );
       const data = await response.json();
-      const speciesResponse = await fetch(data.species.url);
-      const speciesData = await speciesResponse.json();
+      // const speciesResponse = await fetch(data.species.url);
+      const speciesData = await response.json();
       const description = speciesData.flavor_text_entries.find(
         (entry: { language: { name: string } }) => entry.language.name === 'en',
       )?.flavor_text;

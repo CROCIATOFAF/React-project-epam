@@ -19,7 +19,7 @@ const Card: React.FC<CardProps> = ({ item, onClick }) => {
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      dispatch(selectItem(item.name));
+      dispatch(selectItem(item));
     } else {
       dispatch(unselectItem(item.name));
     }
@@ -28,8 +28,11 @@ const Card: React.FC<CardProps> = ({ item, onClick }) => {
   return (
     <div className="card" onClick={onClick}>
       <input
+        className="checkbox"
         type="checkbox"
-        checked={selectedItems.includes(item.name)}
+        checked={selectedItems.some(
+          selectedItem => selectedItem.name === item.name,
+        )}
         onChange={handleCheckboxChange}
         onClick={e => e.stopPropagation()}
       />

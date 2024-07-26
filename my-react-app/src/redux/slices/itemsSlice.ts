@@ -4,7 +4,7 @@ import { RootState } from '../store';
 
 interface ItemState {
   items: Pokemon[];
-  selectedItems: string[];
+  selectedItems: Pokemon[];
   currentPage: number;
   totalPages: number;
   selectedCard: PokemonDetails | null;
@@ -22,7 +22,7 @@ const initialState: ItemState = {
   searchTerm: '',
 };
 
-// Async thunk for fetching items
+// for fetching items
 export const fetchItems = createAsyncThunk(
   'items/fetchItems',
   async ({
@@ -72,7 +72,7 @@ export const fetchItems = createAsyncThunk(
   },
 );
 
-// Async thunk for fetching item details
+// fetching item details
 export const fetchItemDetails = createAsyncThunk(
   'items/fetchItemDetails',
   async (name: string): Promise<PokemonDetails> => {
@@ -105,12 +105,12 @@ const itemsSlice = createSlice({
     setItems: (state, action: PayloadAction<Pokemon[]>) => {
       state.items = action.payload;
     },
-    selectItem: (state, action: PayloadAction<string>) => {
+    selectItem: (state, action: PayloadAction<Pokemon>) => {
       state.selectedItems.push(action.payload);
     },
     unselectItem: (state, action: PayloadAction<string>) => {
       state.selectedItems = state.selectedItems.filter(
-        id => id !== action.payload,
+        item => item.name !== action.payload,
       );
     },
     setCurrentPage: (state, action: PayloadAction<number>) => {

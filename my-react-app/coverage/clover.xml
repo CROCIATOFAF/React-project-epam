@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1721848551544" clover="3.2.0">
-  <project timestamp="1721848551544" name="All files">
+<coverage generated="1722014548726" clover="3.2.0">
+  <project timestamp="1722014548726" name="All files">
     <metrics statements="109" coveredstatements="56" conditionals="18" coveredconditionals="7" methods="43" coveredmethods="11" elements="170" coveredelements="74" complexity="0" loc="109" ncloc="109" packages="7" files="7" classes="7"/>
     <package name="components.Card">
       <metrics statements="13" coveredstatements="6" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="1"/>
@@ -17,8 +17,8 @@
         <line num="22" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="45" count="2" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="46" count="2" type="stmt"/>
       </file>
     </package>
     <package name="components.CardList">
